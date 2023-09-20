@@ -115,3 +115,74 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+const haberYapici = (haber) => {
+  const article = document.createElement("div");
+  article.classList.add("article");
+
+  const haberBasligi = document.createElement("h2");
+  haberBasligi.textContent = haber["baslik"];
+
+  const haberTarihi = document.createElement("p");
+  haberTarihi.classList.add("tarih");
+  haberTarihi.textContent = haber["tarih"];
+
+  article.append(haberBasligi, haberTarihi)
+
+  for(let i = 1; i <= 3; i++ ) {
+    const haberParagrafi = document.createElement("p");
+    haberParagrafi.textContent = Object.values(haber)[1 + i];
+    article.append(haberParagrafi)
+  };
+
+  const haberButonu = document.createElement("button");
+  haberButonu.classList.add("expandButton");
+  haberButonu.textContent = "+";
+
+  haberButonu.addEventListener('click', () => {
+    article.classList.toggle("article-open");
+
+  })
+  article.append(haberButonu)
+
+  return article;
+}
+
+const articles = document.querySelector('.articles')
+
+const yeniHaber = {
+  baslik: "Berkan Yüce'nin haber başlığı",
+  tarih: "20 Eylül 2023",
+  ilkParagraf: `Lorem Ipsum is simply dummy text of the printing and 
+  typesetting industry. Lorem Ipsum has been the industry's standard 
+  dummy text ever since the 1500s, when an unknown printer took a galley 
+  of type and scrambled it to make a type specimen book. It has survived
+   not only five centuries, but also the leap into electronic 
+   typesetting, remaining essentially unchanged. It was popularised in 
+   the 1960s with the release of Letraset sheets containing Lorem Ipsum
+    passages, and more recently with desktop publishing software like A
+    ldus PageMaker including versions of Lorem Ipsum.`,
+  ikinciParagraf: `Lorem Ipsum is simply dummy text of the printing and 
+  typesetting industry. Lorem Ipsum has been the industry's standard 
+  dummy text ever since the 1500s, when an unknown printer took a galley 
+  of type and scrambled it to make a type specimen book. It has survived
+   not only five centuries, but also the leap into electronic 
+   typesetting, remaining essentially unchanged. It was popularised in 
+   the 1960s with the release of Letraset sheets containing Lorem Ipsum
+    passages, and more recently with desktop publishing software like A
+    ldus PageMaker including versions of Lorem Ipsum.`,
+  ucuncuParagraf: `Lorem Ipsum is simply dummy text of the printing and 
+  typesetting industry. Lorem Ipsum has been the industry's standard 
+  dummy text ever since the 1500s, when an unknown printer took a galley 
+  of type and scrambled it to make a type specimen book. It has survived
+   not only five centuries, but also the leap into electronic 
+   typesetting, remaining essentially unchanged. It was popularised in 
+   the 1960s with the release of Letraset sheets containing Lorem Ipsum
+    passages, and more recently with desktop publishing software like A
+    ldus PageMaker including versions of Lorem Ipsum.`
+}
+
+data.push(yeniHaber);
+data.forEach( haber => {
+  articles.append(haberYapici(haber))
+})
